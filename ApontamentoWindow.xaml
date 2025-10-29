@@ -1,0 +1,50 @@
+﻿<Window x:Class="CitrotecAddin.ApontamentoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Apontamento de Desenhos" Height="250" Width="400"
+        
+        AllowsTransparency="True" 
+        WindowStyle="None" 
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+
+    <!-- Importa seus estilos para o botão -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!-- Borda (sem handler de DragMove, para não mover) -->
+    <Border CornerRadius="10" BorderBrush="#FFD700" BorderThickness="2" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Apontamento Obrigatório" Grid.Row="0" FontWeight="Bold" FontSize="18" Foreground="#333" Margin="20"/>
+
+            <TextBlock Grid.Row="1" Text="Por favor, confirme sua atividade para continuar."
+                       TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="#555"/>
+
+            <Button x:Name="btnConfirmar" 
+                    Grid.Row="2" 
+                    Content="Confirmar Atividade" 
+                    Click="btnConfirmar_Click" 
+                    Style="{StaticResource AppleButtonStyle}" 
+                    Margin="20" 
+                    HorizontalAlignment="Center"
+                    IsDefault="True"/>
+        </Grid>
+    </Border>
+</Window>

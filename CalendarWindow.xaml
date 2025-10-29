@@ -1,0 +1,80 @@
+﻿<Window x:Class="CalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Calendário" Height="360" Width="320"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent"
+        WindowStartupLocation="CenterOwner" Topmost="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="CalendarDayButtonStyle" TargetType="CalendarDayButton">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#555"/>
+                <Setter Property="MinWidth" Value="30"/>
+                <Setter Property="MinHeight" Value="30"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CalendarDayButton">
+                            <Grid>
+                                <Ellipse x:Name="Background" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"/>
+                                <ContentPresenter x:Name="Content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Background" Property="Fill" Value="#EAEAEA"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Background" Property="Fill" Value="#faa61a"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsToday" Value="True">
+                                    <Setter TargetName="Background" Property="Stroke" Value="#faa61a"/>
+                                    <Setter TargetName="Background" Property="StrokeThickness" Value="1.5"/>
+                                </Trigger>
+                                <Trigger Property="IsBlackedOut" Value="True">
+                                    <Setter TargetName="Content" Property="Opacity" Value="0.3"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ModernCalendarStyle" TargetType="Calendar">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border CornerRadius="10" BorderBrush="#E0E0E0" BorderThickness="1" Background="White" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Calendário" Grid.Row="0" FontWeight="SemiBold" FontSize="16" Foreground="#333" Margin="15" HorizontalAlignment="Center"/>
+
+            <Calendar x:Name="MainCalendar" Grid.Row="1" Margin="10,0,10,10"
+                      Style="{StaticResource ModernCalendarStyle}"
+                      SelectionMode="SingleDate"
+                      SelectedDatesChanged="MainCalendar_SelectedDatesChanged"/>
+            <Button Grid.Row="2" x:Name="btnClose" Content="Fechar" 
+                    Width="100" Margin="0,0,0,15" HorizontalAlignment="Center" 
+                    Style="{StaticResource AppleButtonStyle}" Click="btnClose_Click"/>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,109 @@
+﻿<Page x:Class="AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      Title="AdminPage" Background="Transparent">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Border HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="950" Margin="30,25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Gerenciamento de Usuários" FontSize="28" FontWeight="Bold" Foreground="#1C202A"/>
+                <TextBlock Text="Aprove, reprove e defina os níveis de acesso para cada usuário." FontSize="16" Foreground="#6E7687" Margin="0,5,0,20"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="1" x:Name="UsersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" 
+                      HeadersVisibility="Column" GridLinesVisibility="Horizontal" Background="White"
+                      BorderBrush="#E0E0E0" BorderThickness="1" RowHeaderWidth="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Usuário (Login)" Binding="{Binding NomeUsuario}" IsReadOnly="False" Width="*"/>
+                    <DataGridTextColumn Header="Nome Completo" Binding="{Binding NomeCompleto}" IsReadOnly="False" Width="2*"/>
+                    <DataGridTextColumn Header="Tag de Usuário" Binding="{Binding UserTag}" IsReadOnly="False" Width="*"/>
+
+                    <DataGridTemplateColumn Header="Sexo" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Sexo}" VerticalAlignment="Center" Margin="10,0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedItem="{Binding Sexo}">
+                                    <sys:String>M</sys:String>
+                                    <sys:String>F</sys:String>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Nível" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Nivel}" VerticalAlignment="Center" Margin="10,0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedItem="{Binding Nivel}">
+                                    <sys:Int32>1</sys:Int32>
+                                    <sys:Int32>2</sys:Int32>
+                                    <sys:Int32>3</sys:Int32>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridCheckBoxColumn Header="Aprovado" Binding="{Binding Aprovado}" Width="80"/>
+
+                    <DataGridTemplateColumn Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="ResetPasswordButton" 
+                                        Content="Resetar Senha" 
+                                        Click="ResetPasswordButton_Click"
+                                        Foreground="#007AFF"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Cursor="Hand"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteUserButton" 
+                                        Content="Deletar" 
+                                        Click="DeleteUserButton_Click"
+                                        Foreground="Red"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Cursor="Hand"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                <Button x:Name="SaveChangesButton" Content="Salvar Alterações" Style="{StaticResource AppleButtonStyle}" Click="SaveChangesButton_Click"/>
+                <Button x:Name="BackButton" Content="Voltar" Style="{StaticResource AppleButtonStyle}" Margin="10,0,0,0" Click="BackButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>

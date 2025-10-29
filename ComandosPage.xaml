@@ -1,0 +1,71 @@
+﻿<Page x:Class="ComandosPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d"
+      Title="ComandosPage" Background="Transparent">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Border Padding="30,25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Lista de Comandos" FontSize="28" FontWeight="Bold" Foreground="#1C202A"/>
+                <TextBlock x:Name="EnvironmentTitleLabel" Text="Nenhum ambiente ativo" FontSize="16" Foreground="#6E7687" Margin="0,5,0,0"/>
+                <TextBox x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged" Margin="0,20,0,10" Height="40" 
+                         Style="{StaticResource ModernSearchBoxStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="CommandsItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Margin="0,5" Padding="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <ToggleButton Style="{StaticResource PinToggleButton}" 
+                                                      ToolTip="Fixar/Desafixar Comando"
+                                                      IsChecked="{Binding IsPinned, Mode=TwoWay}"
+                                                      Click="PinButton_Click"/>
+
+                                        <Border Width="48" Height="48" CornerRadius="8" Background="#f3f3f3" Margin="10,0,15,0">
+                                            <TextBlock Text="{Binding IconAcronym}" FontWeight="Bold" FontSize="18" Foreground="#555"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" FontSize="16" Foreground="#333"/>
+                                        <TextBlock Text="{Binding Description}" FontSize="13" Foreground="#6E7687" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <Button Grid.Column="2" Content="Abrir" 
+                                            Click="CommandButton_Click" 
+                                            Style="{StaticResource CompactActionButtonStyle}" 
+                                            Margin="15,0,5,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Page>

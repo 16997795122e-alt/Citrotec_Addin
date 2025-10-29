@@ -1,0 +1,391 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings> <OutputType>Library</OutputType>
+		<StartupObject>
+		</StartupObject>
+		<MyType>Windows</MyType>
+		<PublishUrl>http://localhost/InventorAddIn/</PublishUrl>
+		<Install>true</Install>
+		<InstallFrom>Web</InstallFrom>
+		<UpdateEnabled>true</UpdateEnabled>
+		<UpdateMode>Foreground</UpdateMode>
+		<UpdateInterval>7</UpdateInterval>
+		<UpdateIntervalUnits>Days</UpdateIntervalUnits>
+		<UpdatePeriodically>false</UpdatePeriodically>
+		<UpdateRequired>false</UpdateRequired>
+		<MapFileExtensions>true</MapFileExtensions>
+		<ApplicationRevision>0</ApplicationRevision>
+		<ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+		<IsWebBootstrapper>true</IsWebBootstrapper>
+		<UseApplicationTrust>false</UseApplicationTrust>
+		<BootstrapperEnabled>true</BootstrapperEnabled>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+		<Title>CitrotecAddin</Title>
+		<Description>CitrotecAddin</Description>
+		<Company>Autodesk, Inc.</Company>
+		<Product>Autodesk Inventor</Product>
+		<Copyright>Copyright ©2024 Autodesk, Inc.</Copyright>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DocumentationFile>.xml</DocumentationFile>
+		<NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+		<RegisterForComInterop>false</RegisterForComInterop>
+		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DocumentationFile>.xml</DocumentationFile>
+		<DefineDebug>false</DefineDebug>
+		<NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+		<DebugType>none</DebugType>
+		<RegisterForComInterop>false</RegisterForComInterop>
+		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<PropertyGroup>
+		<EnableDefaultItems>false</EnableDefaultItems>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Update="System">
+			<Name>System</Name>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="AddPropertyWindow.xaml.vb" />
+		<Compile Include="AdminPage.xaml.vb" />
+		<Compile Include="Announcement.vb" />
+		<Compile Include="AnnouncementHistoryWindow.xaml.vb" />
+		<Compile Include="ApontamentoWindow.xaml.vb" />
+		<Compile Include="ApplyCitrotecLabelWindow.xaml.vb" />
+		<Compile Include="BibliotecaPage.xaml.vb" />
+		<Compile Include="BOMEntry.vb" />
+		<Compile Include="BOMPage.xaml.vb" />
+		<Compile Include="BooleanToVisibilityNegatedConverter.vb" />
+		<Compile Include="CalendarWindow.xaml.vb" />
+		<Compile Include="CenterPointsWindow.xaml.vb" />
+		<Compile Include="ChangeUnitsWindow.xaml.vb" />
+		<Compile Include="CommandManager.vb" />
+		<Compile Include="ControlarDimensoesWindow.xaml.vb" />
+		<Compile Include="CreateNozzleTableWindow.xaml.vb" />
+		<Compile Include="CriarPlanificacoesWindow.xaml.vb" />
+		<Compile Include="DatabaseManager.vb" />
+		<Compile Include="ComandosPage.xaml.vb" />
+		<Compile Include="ExportarDwgWindow.xaml.vb" />
+		<Compile Include="ExportarSectraWindow.xaml.vb" />
+		<Compile Include="GrayOutPhantomsWindow.xaml.vb" />
+		<Compile Include="HomePage.xaml.vb" />
+		<Compile Include="InputBoxWindow.xaml.vb" />
+		<Compile Include="InventorCommand.vb" />
+		<Compile Include="JanelaPrincipal.xaml.vb" />
+		<Compile Include="LoginWindow.xaml.vb" />
+		<Compile Include="MaterialSearchResult.vb" />
+		<Compile Include="MedirArestasWindow.xaml.vb" />
+		<Compile Include="MessageBoxWindow.xaml.vb" />
+		<Compile Include="My Project\Resources.Designer.vb">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Include="My Project\Settings.Designer.vb">
+		  <DesignTimeSharedInput>True</DesignTimeSharedInput>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+		<Compile Include="OrganizarBaloesWindow.xaml.vb" />
+		<Compile Include="PesquisaMateriaisPage.xaml.vb" />
+		<Compile Include="PesquisaMateriaisViewModel.vb" />
+		<Compile Include="PostAnnouncementWindow.xaml.vb" />
+		<Compile Include="PrepareNozzlePartWindow.xaml.vb" />
+		<Compile Include="PropriedadesPage.xaml.vb" />
+		<Compile Include="RegisterWindow.xaml.vb" />
+		<Compile Include="ResetPasswordWindow.xaml.vb" />
+		<Compile Include="SelectModelStateWindow.xaml.vb" />
+		<Compile Include="SessionManager.vb" />
+		<Compile Include="StandardAddInServer.vb" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.vb" />
+		<Compile Include="StringIsNullOrEmptyToVisibilityConverter.vb" />
+		<Compile Include="User.vb" />
+		<Compile Include="UserLevelConverter.vb" />
+		<Compile Include="UserSettingsManager.vb" />
+		<Compile Include="VerificarRegrasWindow.xaml.vb" />
+		<Compile Include="WindowManager.vb" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="App.config" />
+		<None Include="My Project\Application.myapp" />
+		<None Include="My Project\Settings.settings">
+		  <CustomToolNamespace>My</CustomToolNamespace>
+		  <Generator>SettingsSingleFileGenerator</Generator>
+		  <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+		</None>
+		<None Include="Readme.txt" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="CitrotecAddin.X.manifest" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Autodesk.CitrotecAddin.Inventor.addin">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+			<Visible>False</Visible>
+			<ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+			<Install>false</Install>
+		</BootstrapperPackage>
+		<BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+			<Visible>False</Visible>
+			<ProductName>.NET Framework 3.5 SP1</ProductName>
+			<Install>true</Install>
+		</BootstrapperPackage>
+		<BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+			<Visible>False</Visible>
+			<ProductName>Windows Installer 3.1</ProductName>
+			<Install>true</Install>
+		</BootstrapperPackage>
+	</ItemGroup>
+	<ItemGroup>
+		<COMReference Include="stdole">
+			<Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+			<VersionMajor>2</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<Lcid>0</Lcid>
+			<WrapperTool>primary</WrapperTool>
+			<Isolated>False</Isolated>
+			<EmbedInteropTypes>False</EmbedInteropTypes>
+		</COMReference>
+		<COMReference Include="Microsoft.Office.Interop.Excel">
+		  <WrapperTool>tlbimp</WrapperTool>
+		  <VersionMinor>9</VersionMinor>
+		  <VersionMajor>1</VersionMajor>
+		  <Guid>00020813-0000-0000-c000-000000000046</Guid>
+		  <Lcid>0</Lcid>
+		  <Isolated>false</Isolated>
+		  <EmbedInteropTypes>true</EmbedInteropTypes>
+		</COMReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="icons8-página-inicial-32.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="icons8-produto-32.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="icons8-editar-propriedade-32.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="icons8-mostrar-propriedade.-32.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="icons8-visão-da-página-4-32.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="IconeTitulo.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <EmbeddedResource Include="PropriedadesConfig.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <Resource Include="icons8-console-33.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\default.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="biblioteca_active.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="biblioteca_inactive.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="bom_active.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="bom_inactive.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="comandos_active.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="comandos_inactive.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="home_active.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="home_inactive.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <EmbeddedResource Include="CitrotecIcon_16.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="CitrotecIcon_32.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="ExportarSectraVideo.avi" />
+	  <Content Include="PackageContents.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Resource Include="propriedades_active.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="propriedades_inactive.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\f_level1.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\f_level2.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\f_level3.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\m_level1.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\m_level2.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\Avatars\m_level3.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Content Include="Videos\chrome_IDTC6j2kFl.mp4">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="My Project\IconeCitro.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="My Project\Resources.resx">
+	    <CustomToolNamespace>My.Resources</CustomToolNamespace>
+	    <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Include="AddPropertyWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="AdminPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="AnnouncementHistoryWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ApontamentoWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ApplyCitrotecLabelWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="BibliotecaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="BOMPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="CalendarWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="CenterPointsWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ChangeUnitsWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ControlarDimensoesWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="CreateNozzleTableWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="CriarPlanificacoesWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="Estilos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ComandosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ExportarDwgWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ExportarSectraWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="GrayOutPhantomsWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="InputBoxWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="JanelaPrincipal.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="LoginWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="MedirArestasWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="MessageBoxWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="OrganizarBaloesWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="PesquisaMateriaisPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="PostAnnouncementWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="PrepareNozzlePartWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="PropriedadesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="RegisterWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="ResetPasswordWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="SelectModelStateWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Include="VerificarRegrasWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Autodesk.Inventor.Interop">
+			<HintPath Condition="Exists('$(programfiles)\Autodesk\Inventor 2025\Bin')">$(programfiles)\Autodesk\Inventor 2025\Bin\Autodesk.Inventor.Interop.dll</HintPath>
+			<EmbedInteropTypes>False</EmbedInteropTypes>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Icons\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+	  <PackageReference Include="System.Data.SQLite" Version="2.0.2" />
+	</ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="rem Copia os arquivos para a pasta local de Add-ins (para depuração)&#xD;&#xA;xcopy &quot;$(TargetDir).&quot; &quot;$(APPDATA)\Autodesk\Inventor 2025\Addins\CitrotecAddin\&quot; /S /Y /I &#xD;&#xA;xcopy &quot;$(ProjectDir)Autodesk.CitrotecAddin.Inventor.addin&quot; &quot;$(APPDATA)\Autodesk\Inventor 2025\Addins\CitrotecAddin\&quot; /Y&#xD;&#xA;&#xD;&#xA;rem Publica a nova versão na pasta central do servidor&#xD;&#xA;xcopy &quot;$(TargetDir).&quot; &quot;\\SERVIDOR20\eng\Engenharia\iLogic\CitrotecAddin\&quot; /S /Y /I" />
+	</Target>
+</Project>

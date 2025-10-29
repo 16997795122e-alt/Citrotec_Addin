@@ -1,0 +1,69 @@
+﻿<Page x:Class="BOMPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Title="BOMPage" Background="Transparent">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Border Padding="30,25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Editor da Lista de Materiais (BOM)" FontSize="28" FontWeight="Bold" Foreground="#1C202A" Margin="0,0,0,15"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,20">
+                <Button x:Name="LoadBOMButton" Content="Carregar BOM" Style="{StaticResource AppleButtonStyle}" Click="LoadBOMButton_Click" Margin="0,0,10,0"/>
+                <Button x:Name="SaveChangesButton" Content="Salvar Alterações" Style="{StaticResource AppleButtonStyle}" Click="SaveChangesButton_Click" IsEnabled="False" Margin="0,0,10,0"/>
+                <Button x:Name="FormatBOMButton" Content="Formatar BOM" Style="{StaticResource AppleButtonStyle}" Click="FormatBOMButton_Click" IsEnabled="False"/>
+                <TextBlock x:Name="StatusTextBlock" Text="Carregue uma montagem ou desenho para começar." VerticalAlignment="Center" Foreground="#6E7687" FontStyle="Italic" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" x:Name="BomDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding BOMEntries}"
+                      AlternatingRowBackground="#f9f9f9" RowHeaderWidth="0" CanUserDeleteRows="False">
+                <DataGrid.Resources>
+                    <Style x:Key="CustomQtyCellStyle" TargetType="DataGridCell">
+                        <Setter Property="ToolTip" Value="{Binding QtyToolTip}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsQtyCustom}" Value="True">
+                                <Setter Property="Background" Value="#FFF7D6"/>
+                                <Setter Property="Foreground" Value="#9C6500"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item" Binding="{Binding Item, Mode=OneWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Part Number" Binding="{Binding PartNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Unit QTY" Binding="{Binding UnitQty, Mode=OneWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="QTY" Binding="{Binding Qty, Mode=OneWay}" IsReadOnly="True"/>
+
+                    <DataGridTextColumn Header="Qtd" Binding="{Binding Qtd, UpdateSourceTrigger=PropertyChanged}" CellStyle="{StaticResource CustomQtyCellStyle}"/>
+
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <DataGridTextColumn Header="Peso" Binding="{Binding Peso, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="QD" Binding="{Binding QD, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <DataGridTextColumn Header="DIMENSAO1" Binding="{Binding DIMENSAO1, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="DIMENSAO2" Binding="{Binding DIMENSAO2, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="COMPLEMENTO" Binding="{Binding COMPLEMENTO, UpdateSourceTrigger=PropertyChanged}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</Page>

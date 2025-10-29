@@ -1,0 +1,14 @@
+<Addin Type="Standard">
+  <!--Created for Autodesk Inventor Version 29.0-->
+  <ClassId>{c3efa85c-66f1-44ea-9a42-a91c896e6d04}</ClassId>
+  <ClientId>{c3efa85c-66f1-44ea-9a42-a91c896e6d04}</ClientId>
+  <DisplayName>CitrotecAddin</DisplayName>
+  <Description>CitrotecAddin</Description>
+  <Assembly>CitrotecAddin.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>1</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>28..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+</Addin>

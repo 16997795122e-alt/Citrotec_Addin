@@ -1,0 +1,174 @@
+{
+  "LastUserTag": "E.A.S.",
+  "DocumentConfigs": {
+    "Part": {
+      "Properties": [
+        {
+          "Name": "Part Number",
+          "DisplayName": "",
+          "IsCustom": false,
+          "Type": "Text"
+        },
+        {
+          "Name": "Código",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "DIMENSAO1",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "DIMENSAO2",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "Descrição",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "COMPLEMENTO",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "Peso",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        }
+      ]
+    },
+    "Assembly": {
+      "Properties": [
+        {
+          "Name": "Part Number",
+          "DisplayName": "",
+          "IsCustom": false,
+          "Type": "Text"
+        },
+        {
+          "Name": "Código",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "Descrição",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "COMPLEMENTO",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "Peso",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        }
+      ]
+    },
+    "Drawing": {
+      "Properties": [
+        {
+          "Name": "Company",
+          "IsCustom": false,
+          "DisplayName": "Cliente",
+          "Type": "Text"
+        },
+        {
+          "Name": "Authority",
+          "IsCustom": false,
+          "DisplayName": "Desenhista",
+          "Type": "Text"
+        },
+        {
+          "Name": "NRODESENHO",
+          "IsCustom": true,
+          "DisplayName": "Nº Desenho",
+          "Type": "Text"
+        },
+        {
+          "Name": "NROOT",
+          "IsCustom": true,
+          "DisplayName": "OT",
+          "Type": "Text"
+        },
+        {
+          "Name": "TITULO1",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "TITULO2",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "TITULO3",
+          "IsCustom": true,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "creation time",
+          "IsCustom": false,
+          "DisplayName": "Data Des.",
+          "Type": "Date"
+        },
+        {
+          "Name": "date checked",
+          "IsCustom": false,
+          "DisplayName": "Data Verif.",
+          "Type": "Date"
+        },
+        {
+          "Name": "engr date approved",
+          "IsCustom": false,
+          "DisplayName": "Data Aprov.",
+          "Type": "Date"
+        },
+        {
+          "Name": "PESOTOTAL",
+          "IsCustom": true,
+          "DisplayName": "Peso Total",
+          "Type": "Text"
+        }
+      ]
+    },
+    "Presentation": {
+      "Properties": [
+        {
+          "Name": "Title",
+          "IsCustom": false,
+          "DisplayName": "",
+          "Type": "Text"
+        },
+        {
+          "Name": "Comments",
+          "IsCustom": false,
+          "DisplayName": "",
+          "Type": "Text"
+        }
+      ]
+    },
+    "Unknown": {
+      "Properties": []
+    }
+  }
+}

@@ -1,0 +1,261 @@
+﻿<Page x:Class="PesquisaMateriaisPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="PesquisaMateriaisPage" Background="Transparent"
+      xmlns:local="clr-namespace:CitrotecAddin">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <local:StringIsNullOrEmptyToVisibilityConverter x:Key="StringEmptyToVisConverter"/>
+
+            <Style x:Key="IconButtonStyleBase" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="#555"/>
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}">
+                                <TextBlock Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#EAEAEA"/>
+                                    <Setter Property="Foreground" Value="#faa61a"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="IconCopyCodeButtonStyle" TargetType="Button" BasedOn="{StaticResource IconButtonStyleBase}">
+                <Setter Property="Content" Value="&#xE8C8;"/>
+                <Setter Property="ToolTip" Value="Copiar Código/Desenho"/>
+            </Style>
+
+            <Style x:Key="IconCopyDescriptionButtonStyle" TargetType="Button" BasedOn="{StaticResource IconButtonStyleBase}">
+                <Setter Property="Content" Value="&#xE7C3;"/>
+                <Setter Property="ToolTip" Value="Copiar Descrição"/>
+            </Style>
+
+            <Style x:Key="IconApplyMaterialButtonStyle" TargetType="Button" BasedOn="{StaticResource IconButtonStyleBase}">
+                <Setter Property="Content" Value="&#xE76B;"/>
+                <Setter Property="ToolTip" Value="Aplicar Material à Peça/Montagem Ativa"/>
+            </Style>
+
+
+            <DataTemplate x:Key="MaterialResultItemTemplate">
+                <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Margin="0,0,0,5" Padding="5,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" MinWidth="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Style="{StaticResource IconCopyCodeButtonStyle}"
+                                Command="{Binding DataContext.CopyCodeCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                CommandParameter="{Binding}"
+                                Margin="0,0,5,0"/>
+                        <Button Grid.Column="1" x:Name="CopyDescriptionButton"
+                                Style="{StaticResource IconCopyDescriptionButtonStyle}"
+                                Command="{Binding DataContext.CopyDescriptionCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                CommandParameter="{Binding}"
+                                Margin="0,0,5,0"/>
+                        <Button Grid.Column="2" x:Name="ApplyMaterialButton"
+                                Style="{StaticResource IconApplyMaterialButtonStyle}"
+                                Command="{Binding DataContext.ApplyMaterialCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                CommandParameter="{Binding}"
+                                Margin="0,0,10,0"/>
+
+                        <TextBlock Grid.Column="3"
+                                   Text="{Binding Codigo}"
+                                   FontWeight="SemiBold"
+                                   Foreground="#333"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,15,0"/>
+
+                        <TextBlock Grid.Column="4"
+                                   Text="{Binding Descricao}"
+                                   Foreground="#555"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <Style x:Key="TextBoxWithPlaceholder" TargetType="TextBox" BasedOn="{StaticResource ModernSearchBoxStyle}">
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <Border x:Name="border" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                </Border>
+                                <TextBlock Text="{TemplateBinding Tag}"
+                                           Foreground="#AAA"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="15,0,0,0"
+                                           IsHitTestVisible="False">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value=""/>
+                                                        <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#faa61a"/>
+                                    <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Border Padding="30,25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Pesquisar Materiais (Sectra)" FontSize="28" FontWeight="Bold" Foreground="#1C202A" Margin="0,0,0,20"/>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="CodigoTextBox" Grid.Column="0"
+                             Text="{Binding SearchCodigo, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxWithPlaceholder}"
+                             Tag="Código ou Desenho"
+                             Margin="0,0,10,0"/>
+                    <Button x:Name="SearchByCodeButton" Grid.Column="1"
+                            Content="Buscar por Código"
+                            Width="150"
+                            Style="{StaticResource AppleButtonStyle}"
+                            Command="{Binding SearchByCodeCommand}"
+                            IsEnabled="{Binding !IsSearching}"
+                            VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="OTTextBox" Grid.Column="0"
+                             Text="{Binding SearchOT, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxWithPlaceholder}"
+                             Tag="OT (Opcional)"
+                             Margin="0,0,10,0"/>
+                    <TextBox x:Name="DescricaoTextBox" Grid.Column="1"
+                             Text="{Binding SearchDescricao, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxWithPlaceholder}"
+                             Tag="Descrição (Termos separados por ';')"
+                             Margin="0,0,10,0"/>
+                    <Button x:Name="SearchByFilterButton" Grid.Column="2"
+                            Content="Buscar por Filtros"
+                            Width="150"
+                            Style="{StaticResource AppleButtonStyle}"
+                            Command="{Binding SearchByFilterCommand}"
+                            IsEnabled="{Binding !IsSearching}"
+                            VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+
+            <TextBlock Grid.Row="2" x:Name="LastSearchTermsTextBlock"
+                       Text="{Binding LastSearchTerms}"
+                       Foreground="#888" FontStyle="Italic" TextWrapping="Wrap"
+                       Margin="5,15,0,5"
+                       Visibility="{Binding LastSearchTerms, Converter={StaticResource StringEmptyToVisConverter}}"/>
+
+
+            <ScrollViewer Grid.Row="3" Margin="0,5,0,0"
+                          VerticalScrollBarVisibility="Auto"
+                          MaxHeight="400">
+                <ItemsControl x:Name="ResultsItemsControl"
+                              ItemsSource="{Binding SearchResults}"
+                              ItemTemplate="{StaticResource MaterialResultItemTemplate}"/>
+            </ScrollViewer>
+
+
+            <Border Grid.Row="3" Background="#80FFFFFF" Margin="0,5,0,0"
+                    Visibility="{Binding IsSearching, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="Buscando no Sectra..."
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Foreground="#faa61a"/>
+            </Border>
+
+            <Grid Grid.Row="4" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding StatusMessage}"
+                           Foreground="#6E7687"
+                           FontStyle="Italic"
+                           VerticalAlignment="Center"/>
+                <Button Grid.Column="1" x:Name="ClearFiltersButton"
+                        Content="Limpar Filtros"
+                        Style="{StaticResource AppleButtonStyle}"
+                        Background="Transparent" BorderBrush="#AAA" Foreground="#555"
+                        Command="{Binding ClearFiltersCommand}"
+                        IsEnabled="{Binding !IsSearching}"/>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Page>

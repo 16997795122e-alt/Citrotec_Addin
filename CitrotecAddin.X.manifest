@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+
+  <assemblyIdentity name="CitrotecAddin" version="1.0.0.0"></assemblyIdentity>
+
+  <clrClass clsid="{c3efa85c-66f1-44ea-9a42-a91c896e6d04}" progid="CitrotecAddin.StandardAddInServer" threadingModel="Both" name="CitrotecAddin.CitrotecAddin.StandardAddInServer" runtimeVersion=""></clrClass>
+
+  <file name="CitrotecAddin.dll" hashalg="SHA1"></file>
+
+</assembly>

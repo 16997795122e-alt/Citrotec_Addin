@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0"
+                    AutodeskProduct="Inventor"
+                    Name="Citrotec Addin"
+                    Description="Add-in com ferramentas customizadas para a Citrotec."
+                    AppVersion="1.0.0"
+                    Author="Citrotec">
+
+	<CompanyDetails Name="Citrotec Industria e Comercio"/>
+
+	<Components>
+		<RuntimeRequirements OS="Win64" Platform="Inventor" SeriesMin="R2023" />
+		<ComponentEntry AppName="Citrotec Addin"
+						ModuleName="./Contents/CitrotecAddin.dll"
+						LoadOnInventorStartup="True"
+						UserInterfaceVisible="True"
+						Hidden="False">
+		</ComponentEntry>
+	</Components>
+</ApplicationPackage>

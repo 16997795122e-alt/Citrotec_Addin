@@ -1,0 +1,164 @@
+﻿<Page x:Class="HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:CitrotecAddin"
+      mc:Ignorable="d"
+      Title="HomePage" Background="Transparent">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <local:BooleanToVisibilityNegatedConverter x:Key="BoolToVisNegated"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Border Padding="30,25">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <TextBlock x:Name="WelcomeTitleText" Text="Bem-vindo!" FontSize="28" FontWeight="Bold" Foreground="#1C202A"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Button x:Name="AdminPanelButton"
+                            Content="Painel de Administração"
+                            Style="{StaticResource AppleButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Visibility="{Binding IsUserAdmin, Converter={StaticResource BoolToVis}}"
+                            Click="AdminPanelButton_Click"/>
+
+                    <Button x:Name="PostAnnouncementButton"
+                            Content="Postar Novo Aviso"
+                            Style="{StaticResource AppleButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Visibility="{Binding IsUserAdmin, Converter={StaticResource BoolToVis}}"
+                            Click="PostAnnouncementButton_Click"
+                            Margin="10,0,0,0"/>
+                    <Button x:Name="ViewHistoryButton"
+                            Content="Ver Histórico de Avisos"
+                            Style="{StaticResource AppleButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Visibility="{Binding IsUserAdmin, Converter={StaticResource BoolToVis}}"
+                            Click="ViewHistoryButton_Click"
+                            Margin="10,0,0,0"/>
+                </StackPanel>
+                <Border x:Name="AnnouncementsPanel" Background="#FFF9E0" BorderBrush="#FFECB3" BorderThickness="1" CornerRadius="8" Padding="15" Margin="0,30,0,10" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="Avisos Recentes" FontSize="16" FontWeight="SemiBold" Foreground="#8C6A0A" Margin="0,0,0,10"/>
+                        <ItemsControl x:Name="AnnouncementsItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#FFECB3" BorderThickness="0,0,0,1" Margin="0,5" Padding="0,8,0,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,3">
+                                                    <Run Text="{Binding Content}" Foreground="#333"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="11" Foreground="#888">
+                                                    <Run Text="Postado por:"/>
+                                                    <Run Text="{Binding AdminUserName}" FontWeight="SemiBold"/>
+                                                    <Run Text="-"/>
+                                                    <Run Text="{Binding DisplayTimestamp, Mode=OneWay}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="10,0,0,0">
+                                                <Button x:Name="HideButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" FontSize="12" Width="30" Height="30" BorderThickness="0" Background="Transparent" Foreground="#888" Cursor="Hand"
+                                                        ToolTip="Ocultar este aviso"
+                                                        Click="HideAnnouncementButton_Click"
+                                                        Visibility="{Binding DataContext.IsUserAdmin, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisNegated}}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="Button">
+                                                                        <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                                                                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="#E0E0E0"/>
+                                                                    <Setter Property="Foreground" Value="#333"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+
+                                                <Button x:Name="DeleteButton" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="12" Width="30" Height="30" BorderThickness="0" Background="Transparent" Foreground="#D32F2F" Cursor="Hand" Margin="0,0,0,0"
+                                                        ToolTip="Excluir este aviso permanentemente"
+                                                        Click="DeleteAnnouncementButton_Click"
+                                                        Visibility="{Binding DataContext.IsUserAdmin, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVis}}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="Button">
+                                                                        <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                                                                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="#FFEBEE"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock x:Name="NoAnnouncementsMessage" Text="Nenhum aviso nos últimos 7 dias." Foreground="#888" FontStyle="Italic" Visibility="Collapsed"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock x:Name="PinnedCommandsTitle" Text="Acesso Rápido" FontSize="18" FontWeight="SemiBold" Foreground="#1C202A" Margin="0,20,0,10"/>
+
+                <ItemsControl x:Name="PinnedCommandsItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Margin="0" Padding="0,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ToggleButton Grid.Column="0" Style="{StaticResource PinToggleButton}" ToolTip="Desafixar Comando" IsChecked="{Binding IsPinned}" Click="PinButton_Click"/>
+                                    <Border Grid.Column="1" Width="40" Height="40" CornerRadius="8" Background="#f3f3f3" Margin="10,0,15,0">
+                                        <TextBlock Text="{Binding IconAcronym}" FontWeight="Bold" FontSize="16" Foreground="#555" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Grid.Column="2" Text="{Binding DisplayName}" FontWeight="SemiBold" FontSize="15" Foreground="#333" VerticalAlignment="Center"/>
+                                    <Button Grid.Column="3" Content="Abrir" Click="CommandButton_Click" Style="{StaticResource CompactActionButtonStyle}" Margin="15,0,5,0" Padding="15,6" FontSize="12"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock x:Name="NoPinnedCommandsMessage"
+                           Text="Nenhum comando fixado para o ambiente atual. Vá para a página 'Comandos' e clique no alfinete para adicionar favoritos."
+                           Foreground="#888" FontStyle="Italic" TextWrapping="Wrap" Visibility="Collapsed" Margin="0,10,0,0"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</Page>

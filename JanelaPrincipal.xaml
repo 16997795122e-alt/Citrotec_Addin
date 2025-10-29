@@ -1,0 +1,143 @@
+﻿<Window x:Class="JanelaPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+
+        Title="Citrotec Addin"
+        SizeToContent="WidthAndHeight"
+        MinWidth="800" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent"
+        xmlns:local="clr-namespace:CitrotecAddin">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome ResizeBorderThickness="6" CaptionHeight="30" CornerRadius="0" GlassFrameThickness="0"/>
+    </shell:WindowChrome.WindowChrome>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:UserLevelConverter x:Key="UserLevelConv"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border CornerRadius="10" BorderBrush="#E0E0E0" BorderThickness="1" Background="#F2FFFFFF">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" MinWidth="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#f3f3f3" CornerRadius="10,0,0,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Cursor="">
+                        <StackPanel Orientation="Horizontal" Margin="20,17,20,15">
+                            <Image Source="/CitrotecAddin;component/IconeTitulo.png" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="CITROTEC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="18" Foreground="#656565" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                        <Grid x:Name="UserPanel" Margin="15,0,15,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Width="39" Height="39" CornerRadius="25" Background="WhiteSmoke">
+                                <Image Source="{Binding AvatarPath}"/>
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                                <TextBlock Text="{Binding DisplayNameWithTag}" FontWeight="Bold" Foreground="#333"/>
+                                <TextBlock Text="{Binding Nivel, Converter={StaticResource UserLevelConv}}" FontSize="11" Foreground="#666"/>
+                                <Button x:Name="LogoutButton" Content="Sair" Click="LogoutButton_Click" Background="Transparent" BorderThickness="0" Foreground="#007AFF" Cursor="Hand" HorizontalAlignment="Left" Padding="0,2,0,0" FontSize="11">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <Separator Background="#E0E0E0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="0,10,0,0">
+
+                        <RadioButton x:Name="HomeRadio" GroupName="Nav" IsChecked="True" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Home" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="ComandosRadio" GroupName="Nav" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Comandos" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="PropriedadesRadio" GroupName="Nav" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Propriedades" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="BOMRadio" GroupName="Nav" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="BOM" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="BibliotecaRadio" GroupName="Nav" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Biblioteca" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="PesquisaRadio" GroupName="Nav" Checked="NavRadio_Checked" Style="{StaticResource NavButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Pesquisar Materiais" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="15,10,15,15" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8">
+                            <ToggleButton x:Name="VaultToggleButton" Style="{StaticResource VaultToggleSwitchStyle}" ToolTip="Ativa ou Desativa o Add-in do Autodesk Vault" Click="VaultToggleButton_Click"/>
+                            <TextBlock x:Name="VaultStatusText" Text="Vault Status" Foreground="#555" FontSize="11" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        </StackPanel>
+                        <Button x:Name="CalendarButton" Content="Abrir Calendário" FontSize="11" Padding="8,3" BorderThickness="0" Background="#E9E9E9" Foreground="#555" Cursor="Hand" Click="CalendarButton_Click"/>
+                        <TextBlock x:Name="DateTimeTextBlock" Text="23/09/2025 - 15:34" Foreground="#888" FontSize="11" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,12,12,0"
+                                shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button x:Name="btnMinimize" Style="{StaticResource MacMinimizeButtonStyle}" Margin="0,0,5,0" Click="btnMinimize_Click"/>
+                    <Button x:Name="btnClose" Style="{StaticResource MacCloseButtonStyle}" Click="btnClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

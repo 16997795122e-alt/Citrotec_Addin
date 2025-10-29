@@ -1,0 +1,49 @@
+﻿<Window x:Class="ChangeUnitsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Alterar Unidades" Height="450" Width="600"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent"
+        WindowStartupLocation="CenterOwner" Topmost="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Estilos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border CornerRadius="10" BorderBrush="#E0E0E0" BorderThickness="1" Background="White" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Alterar Unidades (Peça/Montagem)" Grid.Row="0" FontWeight="SemiBold" FontSize="16" Foreground="#333" Margin="20,15"/>
+
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" Foreground="#6E7687" Margin="20,0,20,15">
+                Este comando altera as unidades de comprimento e massa do documento ativo e de todos os seus componentes referenciados (Peças e Submontagens).
+            </TextBlock>
+
+            <StackPanel Grid.Row="2" Margin="20,0,20,10">
+                <TextBlock Text="Selecione o sistema de unidades:" FontWeight="SemiBold" Foreground="#555" Margin="0,0,0,8"/>
+                <RadioButton x:Name="rbMetric" Content="Métrico (mm / kg)" GroupName="Units" IsChecked="True" Margin="0,0,0,5"/>
+                <RadioButton x:Name="rbImperial" Content="Polegadas (in / lb)" GroupName="Units"/>
+            </StackPanel>
+
+
+            <TextBox Grid.Row="3" x:Name="LogTextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="12" Margin="20,0" BorderBrush="#E0E0E0" Text="Log de execução aparecerá aqui..."/>
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,15">
+                <Button x:Name="btnClose" Content="Fechar" IsCancel="True" Click="btnClose_Click" Style="{StaticResource AppleButtonStyle}"/>
+                <Button x:Name="btnExecute" Content="Executar Alteração" IsDefault="True" Click="btnExecute_Click" Style="{StaticResource AppleButtonStyle}" Margin="10,0,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
